@@ -124,7 +124,7 @@ onAuthStateChanged(
                     </p>
 
                     <a
-                        href="login.html"
+                        href="../html/login.html"
                         class="saved-login-button"
                     >
                         👤 Go to Login →
@@ -256,7 +256,7 @@ onAuthStateChanged(
                         Places you save will appear here.
                     </p>
 
-                    <a href="index.html">
+                    <a href="../index.html">
                         Explore Places →
                     </a>
 
@@ -392,7 +392,7 @@ onAuthStateChanged(
                             <div>
 
                                 <a
-                                    href="place.html?id=${place.id}"
+                                    href="../html/place.html?id=${place.id}"
                                 >
                                     View details →
                                 </a>

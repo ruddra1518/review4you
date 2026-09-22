@@ -73,7 +73,7 @@ if (signupBtn) {
 
             alert("Account created successfully!");
 
-            window.location.href = "index.html";
+            window.location.href = "../index.html";
 
 
         } catch (error) {
@@ -139,7 +139,7 @@ if (loginBtn) {
 
             alert("Login successful!");
 
-            window.location.href = "index.html";
+            window.location.href = "../index.html";
 
 
         } catch (error) {
@@ -194,7 +194,7 @@ if (accountNameInput && accountEmailInput) {
 
         if (!user) {
 
-            window.location.href = "login.html";
+            window.location.href = "../html/login.html";
             return;
 
         }
@@ -233,7 +233,7 @@ if (saveProfileBtn) {
 
         if (!user) {
             alert("Please login again.");
-            window.location.href = "login.html";
+            window.location.href = "../html/login.html";
             return;
         }
 
@@ -308,7 +308,7 @@ if (changePasswordBtn) {
 
         if (!user || !user.email) {
             alert("Please login again.");
-            window.location.href = "login.html";
+            window.location.href = "../html/login.html";
             return;
         }
 
@@ -380,7 +380,7 @@ if (accountLogoutBtn) {
 
             await signOut(auth);
 
-            window.location.href = "login.html";
+            window.location.href = "../html/login.html";
 
         } catch (error) {
 
@@ -433,7 +433,7 @@ if (verifyEmailBtn) {
 
 
             window.location.href =
-                "login.html";
+                "../html/login.html";
 
 
         } catch (error) {

@@ -148,7 +148,7 @@ if (!place) {
                 </p>
 
                 <a
-                    href="index.html"
+                    href="../index.html"
                     class="back-link"
                 >
                     ← Back to Home
@@ -556,7 +556,7 @@ placeRating =
                 <div class="place-details-footer">
 
                     <a
-                        href="index.html"
+                        href="../index.html"
                         class="back-link"
                     >
                         ← Back to places
@@ -1737,7 +1737,7 @@ updateReviewSummary();
 
 
                 window.location.href =
-                    "login.html";
+                    "../html/login.html";
 
 
                 return;
@@ -2067,7 +2067,7 @@ user;
 
 
                 accountLink.href =
-                    "login.html";
+                    "../html/login.html";
 
 
                 accountMenu.style.display =
@@ -2149,15 +2149,15 @@ user;
                             <hr>
 
 
-                            <a href="my-reviews.html">
+                            <a href="../html/my-reviews.html">
     📝 My Reviews
 </a>
 
-<a href="saved-places.html">
+<a href="../html/saved-places.html">
     ❤️ Saved Places
 </a>
 
-<a href="account.html">
+<a href="../html/account.html">
     ⚙️ Account Settings
 </a>
 
@@ -2222,7 +2222,7 @@ user;
                                     );
 
                                     window.location.href =
-                                        "login.html";
+                                        "../html/login.html";
 
                                 } catch (error) {
 

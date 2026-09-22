@@ -14,7 +14,7 @@
 
     <link
         rel="stylesheet"
-        href="style.css"
+        href="../css/style.css"
     >
 
 </head>
@@ -30,7 +30,7 @@
 
         <div class="container nav-container">
 
-            <a href="index.html" class="logo">
+            <a href="../index.html" class="logo">
 
                 <span class="logo-icon">R</span>
 
@@ -42,22 +42,22 @@
 
             <nav class="nav-links">
 
-                <a href="index.html">
+                <a href="../index.html">
                     Home
                 </a>
 
-                <a href="index.html#categories">
+                <a href="../index.html#categories">
                     Categories
                 </a>
 
-                <a href="index.html#recommended">
+                <a href="../index.html#recommended">
                     Recommendations
                 </a>
 
             </nav>
 
 <div class="nav-actions">
-    <a href="index.html" class="home-btn" title="Home">
+    <a href="../index.html" class="home-btn" title="Home">
         🏠
     </a>
     <button class="location-btn" id="locationButton">
@@ -189,10 +189,10 @@
          JAVASCRIPT
     =========================== -->
 
-<script src="data.js"></script>
-<script src="review.js"></script>
-<script type="module" src="saved-places.js"></script>
-<script src="location.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/review.js"></script>
+<script type="module" src="../js/saved-places.js"></script>
+<script src="../js/location.js"></script>
 
 <script type="module">
 
@@ -205,7 +205,7 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-import { auth } from "./firebase-config.js";
+import { auth } from "../js/firebase-config.js";
 
 
 const accountLink =

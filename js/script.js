@@ -110,7 +110,7 @@ if (accountLink && accountMenu) {
                 "Login";
 
             accountLink.href =
-                "login.html";
+                "html/login.html";
 
             accountMenu.style.display =
                 "none";
@@ -172,7 +172,7 @@ if (window.innerWidth <= 768) {
 
 
                         <a
-                            href="my-reviews.html"
+                            href="html/my-reviews.html"
                             id="myReviewsLink"
                         >
                             📝 My Reviews
@@ -180,7 +180,7 @@ if (window.innerWidth <= 768) {
 
 
                         <a
-                            href="saved-places.html"
+                            href="html/saved-places.html"
                             id="savedPlacesLink"
                         >
                             ❤️ Saved Places
@@ -188,7 +188,7 @@ if (window.innerWidth <= 768) {
 
 
                         <a
-                            href="account.html"
+                            href="html/account.html"
                             id="accountSettingsLink"
                         >
                             ⚙️ Account Settings
@@ -260,7 +260,7 @@ if (window.innerWidth <= 768) {
                             await signOut(auth);
 
                             window.location.href =
-                                "login.html";
+                                "html/login.html";
 
                         } catch (error) {
 
@@ -559,7 +559,7 @@ const placeRating =
 
 
                     <a
-                        href="place.html?id=${place.id}"
+                        href="html/place.html?id=${place.id}"
                     >
                         View details →
                     </a>
@@ -835,7 +835,7 @@ const placeRating =
 
 
                         <a
-                            href="place.html?id=${place.id}"
+                            href="html/place.html?id=${place.id}"
                         >
                             View details →
                         </a>
