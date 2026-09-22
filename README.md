@@ -129,3 +129,59 @@ review4you/
 ├── .firebaserc
 ├── .gitignore
 └── README.md
+---
+
+## 🔐 Security
+
+Review4You uses **Firebase Authentication** and **Firestore Security Rules** to control access to application data.
+
+User reviews are associated with authenticated users, allowing users to manage their own reviews.
+
+Administrative functionality is separated from the public website and is not included in the public hosting deployment.
+
+The Firebase Web API key is restricted to the project's authorized websites and APIs.
+
+> Sensitive credentials, passwords, service-account keys, and private secrets should never be committed to the repository.
+
+---
+
+## 🎯 Project Goals
+
+The main goals of Review4You are:
+
+- Make local discovery easier
+- Help users find affordable options
+- Provide useful community reviews
+- Make local information easier to access
+- Give users a simple way to save and review places
+- Create a simple and user-friendly local discovery experience
+
+---
+
+## 🔮 Future Improvements
+
+Planned improvements include:
+
+- [ ] Improve application performance
+- [ ] Add more local places
+- [ ] Improve filtering options
+- [ ] Improve recommendation functionality
+- [ ] Enhance mobile UI
+- [ ] Add more place information
+- [ ] Expand administrative functionality
+- [ ] Improve accessibility
+- [ ] Add additional features based on user feedback
+
+---
+
+## 👨‍💻 Author
+
+**Ruddra**
+
+GitHub: [@ruddra1518](https://github.com/ruddra1518)
+
+---
+
+<p align="center">
+  Made with ❤️ using HTML, CSS, JavaScript and Firebase
+</p>
