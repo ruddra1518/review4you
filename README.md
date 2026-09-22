@@ -183,6 +183,29 @@ GitHub: [@ruddra1518](https://github.com/ruddra1518)
 
 ---
 
+## 🌐 Live Demo
+
+🚀 **[Visit Review4You](https://review4you-26.web.app/)**
+
+Try the live application and explore places, reviews, saved places, and user accounts.
+
+---
+## 📸 Screenshots
+
+### 🏠 Home Page
+
+![Review4You Home Page](screenshots/home.png)
+
+### 📍 Place Details
+
+![Review4You Place Details](screenshots/place-details.png)
+
+### 👤 User Account
+
+![Review4You Account](screenshots/account.png)
+
+---
+
 <p align="center">
   Made with ❤️ using HTML, CSS, JavaScript and Firebase
 </p>
