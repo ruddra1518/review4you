@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Account Settings - Review4You</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">R</span>
+                <span>Review<span class="logo-highlight">4</span>You</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="saved-places.html">Saved Places</a>
+                <a href="my-reviews.html">My Reviews</a>
+                <a href="recommend.html">Recommend</a>
+            </div>
+            
+<div class="nav-actions">
+
+    <a href="index.html" class="mobile-home-btn">
+        🏠
+    </a>
+
+    <a href="account.html" class="login-btn">
+        Account
+    </a>
+
+</div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ACCOUNT SETTINGS -->
+
+    <main class="account-page">
+
+        <div class="account-container">
+
+            <div class="account-header">
+
+                <p class="eyebrow">ACCOUNT</p>
+
+                <h1>Account Settings</h1>
+
+                <p>
+                    Manage your Review4You account information.
+                </p>
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <section class="account-card">
+
+                <div class="account-card-header">
+
+                    <h2>Profile Information</h2>
+
+                    <p>
+                        Update your name and email address.
+                    </p>
+
+                </div>
+
+
+                <div class="account-form-group">
+
+                    <label for="accountName">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="accountName"
+                        placeholder="Your name"
+                    >
+
+                </div>
+
+
+                <div class="account-form-group">
+
+                    <label for="accountEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="accountEmail"
+                        placeholder="Your email"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="account-save-btn"
+                    id="saveProfileBtn"
+                >
+                    Save Profile
+                </button>
+
+            </section>
+
+
+            <!-- PASSWORD -->
+
+            <section class="account-card">
+
+                <div class="account-card-header">
+
+                    <h2>Change Password</h2>
+
+                    <p>
+                        Update your password to keep your account secure.
+                    </p>
+
+                </div>
+
+
+                <div class="account-form-group">
+
+                    <label for="currentPassword">
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        placeholder="Enter current password"
+                    >
+
+                </div>
+
+
+                <div class="account-form-group">
+
+                    <label for="newPassword">
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="Enter new password"
+                    >
+
+                </div>
+
+
+                <div class="account-form-group">
+
+                    <label for="confirmPassword">
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm new password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="account-save-btn"
+                    id="changePasswordBtn"
+                >
+                    Change Password
+                </button>
+
+            </section>
+
+
+            <!-- ACCOUNT ACTIONS -->
+
+            <section class="account-card account-danger-card">
+
+                <div class="account-card-header">
+
+                    <h2>Account</h2>
+
+                    <p>
+                        Sign out of your Review4You account.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="account-logout-btn"
+                    id="accountLogoutBtn"
+                >
+                    Logout
+                </button>
+
+            </section>
+
+
+            <a href="index.html" class="account-back">
+                ← Back to Review4You
+            </a>
+
+        </div>
+
+    </main>
+
+
+ <script type="module" src="auth.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Reviews | Review4You</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ==========================
+         NAVBAR
+    =========================== -->
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="#" class="logo">
+                <span class="logo-icon">R</span>
+                <span>Review<span class="logo-highlight">4</span>You</span>
+            </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#explore">Explore</a>
+            <a href="index.html#categories">Categories</a>
+        </nav>
+
+        <div id="accountMenu" class="account-menu"></div>
+
+        <div class="nav-actions">
+
+            <!-- Home -->
+            <a href="index.html" class="mobile-home-btn" aria-label="Home">
+                🏠
+            </a>
+
+            <!-- Location -->
+            <button class="location-btn" id="locationButton">
+                📍 <span class="location-text">Your Area</span>
+            </button>
+
+            <!-- Account -->
+            <a href="login.html" class="login-btn" id="accountLink">
+                👤 <span class="account-name">Login</span>
+            </a>
+
+        </div>
+
+        <!-- Location Popup -->
+        <div class="location-popup" id="locationPopup">
+
+            <div class="location-popup-header">
+                <h3>Choose your location</h3>
+                <button id="closeLocationPopup">×</button>
+            </div>
+
+            <button class="detect-location-btn" id="detectLocationBtn">
+                📍 Use My Current Location
+            </button>
+
+            <div class="location-divider">
+                <span>or</span>
+            </div>
+
+            <div class="manual-location">
+
+                <label for="manualLocationInput">
+                    Enter location manually
+                </label>
+
+                <input
+                    type="text"
+                    id="manualLocationInput"
+                    placeholder="e.g. Bhilai, Chhattisgarh"
+                    autocomplete="off"
+                >
+
+                <div
+                    class="location-suggestions"
+                    id="locationSuggestions">
+                </div>
+
+                <button id="saveManualLocationBtn">
+                    Use This Location
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+
+    <!-- ==========================
+         MY REVIEWS
+    =========================== -->
+
+    <main>
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    YOUR REVIEWS
+                </p>
+
+                <h1>
+                    My Reviews
+                </h1>
+
+                <p class="section-description">
+                    Reviews you've shared on Review4You.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div
+            class="places-grid"
+            id="myReviewsGrid"
+        >
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    YOUR CONTRIBUTIONS
+                </p>
+
+                <h2>
+                    My Place Suggestions
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="places-grid"
+            id="mySuggestionsList"
+        >
+        </div>
+
+    </section>
+
+</main>
+
+
+    <!-- ==========================
+         SCRIPTS
+    =========================== -->
+
+    <script src="data.js"></script>
+<script src="review.js"></script>
+<script src="location.js"></script>
+
+<script type="module">
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+import { auth } from "./firebase-config.js";
+
+
+// ==========================
+// FIRESTORE
+// ==========================
+
+const db = getFirestore();
+
+// ==========================
+// LOAD PLACES FROM FIRESTORE
+// ==========================
+
+async function loadPlacesFromFirestore() {
+
+    const snapshot =
+        await getDocs(
+            collection(db, "places")
+        );
+
+    if (!snapshot.empty) {
+
+        places =
+            snapshot.docs.map(
+                function(docSnapshot) {
+
+                    return {
+                        id: Number(docSnapshot.id),
+                        ...docSnapshot.data()
+                    };
+
+                }
+            );
+
+        console.log(
+            "My Reviews - Places loaded:",
+            places.length
+        );
+    }
+}
+
+// ==========================
+// ELEMENTS
+// ==========================
+
+const accountLink =
+    document.getElementById("accountLink");
+
+const accountMenu =
+    document.getElementById("accountMenu");
+
+const reviewsGrid =
+    document.getElementById("myReviewsGrid");
+
+const mySuggestionsList =
+    document.getElementById("mySuggestionsList");
+
+
+// ==========================
+// FIREBASE AUTH STATE
+// ==========================
+
+onAuthStateChanged(
+    auth,
+    async function(user) {
+
+        // ==========================
+        // NOT LOGGED IN
+        // ==========================
+
+        if (!user) {
+
+            if (accountLink) {
+
+                accountLink.textContent =
+                    "Login";
+
+                accountLink.href =
+                    "login.html";
+            }
+
+
+            if (reviewsGrid) {
+
+                reviewsGrid.innerHTML = `
+
+                    <div class="reviews-login-card">
+
+                        <div class="reviews-login-main">
+
+                            <div class="reviews-login-icon">
+                                📝
+                            </div>
+
+                            <h3>
+                                Please login first
+                            </h3>
+
+                            <p>
+                                You need to login to view your reviews.
+                            </p>
+
+                            <a
+                                href="login.html"
+                                class="reviews-login-button"
+                            >
+                                👤 Go to Login →
+                            </a>
+
+                        </div>
+
+
+                        <div class="reviews-login-features">
+
+                            <div class="reviews-feature">
+
+                                <div class="reviews-feature-icon">
+                                    ✍
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Write reviews
+                                    </strong>
+
+                                    <span>
+                                        Share your experience
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="reviews-feature">
+
+                                <div class="reviews-feature-icon">
+                                    ★
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Track your reviews
+                                    </strong>
+
+                                    <span>
+                                        See what you've shared
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="reviews-feature">
+
+                                <div class="reviews-feature-icon">
+                                    ✓
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Manage anytime
+                                    </strong>
+
+                                    <span>
+                                        Edit or delete your reviews
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+
+
+            if (mySuggestionsList) {
+
+                mySuggestionsList.innerHTML = "";
+
+            }
+
+
+            return;
+        }
+
+
+        // ==========================
+        // CURRENT USER
+        // ==========================
+
+        const firebaseUser =
+            user;
+
+
+        const firebaseUserName =
+            firebaseUser.displayName ||
+            firebaseUser.email?.split("@")[0] ||
+            "User";
+
+
+        const firebaseUserEmail =
+            firebaseUser.email ||
+            "";
+
+
+        // ==========================
+        // NAVBAR ACCOUNT
+        // ==========================
+
+        if (accountLink && accountMenu) {
+
+            accountLink.innerHTML =
+                `👤 <span class="account-name">${firebaseUserName}</span>`;
+
+            accountLink.href = "#";
+
+
+            accountLink.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+
+                    accountMenu.innerHTML = `
+
+                        <div>
+
+                            <strong>
+                                👤 ${firebaseUserName}
+                            </strong>
+
+                            <p>
+                                ${firebaseUserEmail}
+                            </p>
+
+                            <hr>
+
+                            <a href="my-reviews.html">
+                                📝 My Reviews
+                            </a>
+
+                            <a href="saved-places.html">
+                                ❤️ Saved Places
+                            </a>
+
+                            <a href="account.html">
+                                ⚙️ Account Settings
+                            </a>
+
+                            <hr>
+
+                            <button id="reviewsLogoutBtn">
+                                Logout
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    if (
+                        accountMenu.dataset.open ===
+                        "true"
+                    ) {
+
+                        accountMenu.style.display =
+                            "none";
+
+                        accountMenu.dataset.open =
+                            "false";
+
+                        return;
+                    }
+
+
+                    accountMenu.style.display =
+                        "block";
+
+                    accountMenu.dataset.open =
+                        "true";
+
+
+                    // ==========================
+                    // LOGOUT
+                    // ==========================
+
+                    const reviewsLogoutBtn =
+                        document.getElementById(
+                            "reviewsLogoutBtn"
+                        );
+
+
+                    if (reviewsLogoutBtn) {
+
+                        reviewsLogoutBtn.addEventListener(
+                            "click",
+                            async function() {
+
+                                try {
+
+                                    await signOut(auth);
+
+                                    window.location.href =
+                                        "login.html";
+
+                                } catch (error) {
+
+                                    console.error(
+                                        error
+                                    );
+
+                                    alert(
+                                        "Could not logout. Please try again."
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        // ==========================
+        // CLOSE ACCOUNT MENU
+        // ==========================
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    accountMenu &&
+                    accountLink &&
+                    !accountMenu.contains(event.target) &&
+                    !accountLink.contains(event.target)
+                ) {
+
+                    accountMenu.style.display =
+                        "none";
+
+                    accountMenu.dataset.open =
+                        "false";
+
+                }
+
+            }
+        );
+
+// ==========================
+// LOAD PLACES FIRST
+// ==========================
+
+try {
+
+    await loadPlacesFromFirestore();
+
+} catch (error) {
+
+    console.error(
+        "Could not load places:",
+        error
+    );
+
+}
+
+        // ==========================
+        // LOAD MY REVIEWS
+        // ==========================
+
+        try {
+
+            const reviewsQuery =
+                query(
+                    collection(db, "reviews"),
+                    where(
+                        "userId",
+                        "==",
+                        firebaseUser.uid
+                    )
+                );
+
+
+            const reviewSnapshot =
+                await getDocs(
+                    reviewsQuery
+                );
+
+
+            const myReviews =
+                reviewSnapshot.docs.map(
+                    function(docSnapshot) {
+
+                        return {
+
+                            id:
+                                docSnapshot.id,
+
+                            ...docSnapshot.data()
+
+                        };
+
+                    }
+                );
+
+
+            console.log(
+                "My Firestore reviews:",
+                myReviews
+            );
+
+
+            // ==========================
+            // NO REVIEWS
+            // ==========================
+
+            if (myReviews.length === 0) {
+
+                reviewsGrid.innerHTML = `
+
+                    <div class="no-results">
+
+                        <h3>
+                            You haven't written any reviews yet.
+                        </h3>
+
+                        <p>
+                            Visit a place and share your experience.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            // ==========================
+            // SHOW REVIEWS
+            // ==========================
+
+            else {
+
+                reviewsGrid.innerHTML = "";
+
+
+                myReviews.forEach(
+                    function(review) {
+
+                        const place =
+                            places.find(
+                                function(place) {
+
+                                    return (
+                                        String(place.id) ===
+                                        String(review.placeId)
+                                    );
+
+                                }
+                            );
+
+
+                        if (!place) {
+                            return;
+                        }
+
+
+                        const card =
+                            document.createElement(
+                                "article"
+                            );
+
+
+                        card.className =
+                            "place-card";
+
+
+                        card.innerHTML = `
+
+                            <div class="place-content">
+
+                                <div class="place-category">
+                                    ${place.category}
+                                </div>
+
+
+                                <h3>
+                                    ${place.name}
+                                </h3>
+
+
+                                <div class="place-rating">
+
+                                    <strong>
+                                        ★ ${review.rating}
+                                    </strong>
+
+                                    <span>
+                                        Your rating
+                                    </span>
+
+                                </div>
+
+
+                                <p>
+                                    ${review.text}
+                                </p>
+
+
+                                <div class="place-footer">
+
+                                    <span>
+                                        ${review.date || ""}
+                                    </span>
+
+
+                                    <div>
+
+                                        <a
+                                            href="place.html?id=${place.id}"
+                                        >
+                                            View place →
+                                        </a>
+
+
+                                        <button
+                                            class="edit-review-btn"
+                                            data-place-id="${review.placeId}"
+                                            data-review-id="${review.id}"
+                                        >
+                                            ✏️ Edit
+                                        </button>
+
+
+                                        <button
+                                            class="delete-review-btn"
+                                            data-place-id="${review.placeId}"
+                                            data-review-id="${review.id}"
+                                        >
+                                            🗑️ Delete
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+
+                        reviewsGrid.appendChild(
+                            card
+                        );
+
+                    }
+                );
+
+            }
+
+
+// ==========================
+// EDIT REVIEW
+// ==========================
+
+document
+    .querySelectorAll(".edit-review-btn")
+    .forEach(function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const placeId =
+                    button.dataset.placeId;
+
+                const reviewId =
+                    button.dataset.reviewId;
+
+
+                if (!placeId || !reviewId) {
+
+                    alert(
+                        "Review information is missing."
+                    );
+
+                    return;
+                }
+
+
+                // Open the actual place page
+                // and tell it which review to edit.
+
+                window.location.href =
+                    "place.html?id="
+                    + encodeURIComponent(placeId)
+                    + "&editReview="
+                    + encodeURIComponent(reviewId);
+
+            }
+        );
+
+    });
+            // ==========================
+            // DELETE REVIEW
+            // ==========================
+
+            document
+                .querySelectorAll(".delete-review-btn")
+                .forEach(
+                    function(button) {
+
+                        button.addEventListener(
+                            "click",
+                            async function() {
+
+                                const reviewId =
+                                    button.dataset.reviewId;
+
+
+                                const confirmDelete =
+                                    confirm(
+                                        "Are you sure you want to delete this review?"
+                                    );
+
+
+                                if (
+                                    !confirmDelete
+                                ) {
+
+                                    return;
+                                }
+
+
+                                try {
+
+                                    await deleteDoc(
+                                        doc(
+                                            db,
+                                            "reviews",
+                                            reviewId
+                                        )
+                                    );
+
+
+                                    alert(
+                                        "Review deleted successfully!"
+                                    );
+
+
+                                    location.reload();
+
+                                } catch (error) {
+
+                                    console.error(
+                                        "Could not delete review:",
+                                        error
+                                    );
+
+
+                                    alert(
+                                        "Could not delete your review. Please try again."
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+
+        } catch (error) {
+
+            console.error(
+                "Could not load your reviews:",
+                error
+            );
+
+
+            reviewsGrid.innerHTML = `
+
+                <div class="no-results">
+
+                    <h3>
+                        Could not load your reviews.
+                    </h3>
+
+                    <p>
+                        Please refresh the page and try again.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        // ==========================
+        // LOAD MY SUGGESTIONS
+        // ==========================
+
+        try {
+
+            const suggestionsQuery =
+                query(
+                    collection(db, "suggestions"),
+                    where(
+                        "userId",
+                        "==",
+                        firebaseUser.uid
+                    )
+                );
+
+
+            const suggestionSnapshot =
+                await getDocs(
+                    suggestionsQuery
+                );
+
+
+            const mySuggestions =
+                suggestionSnapshot.docs.map(
+                    function(docSnapshot) {
+
+                        return {
+
+                            id:
+                                docSnapshot.id,
+
+                            ...docSnapshot.data()
+
+                        };
+
+                    }
+                );
+
+
+            console.log(
+                "My Firestore suggestions:",
+                mySuggestions
+            );
+
+
+            // ==========================
+            // NO SUGGESTIONS
+            // ==========================
+
+            if (
+                mySuggestions.length ===
+                0
+            ) {
+
+                mySuggestionsList.innerHTML = `
+
+                    <div class="no-results">
+
+                        <h3>
+                            No place suggestions yet
+                        </h3>
+
+                        <p>
+                            Places you recommend to the community
+                            will appear here.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            // ==========================
+            // SHOW SUGGESTIONS
+            // ==========================
+
+            else {
+
+                mySuggestionsList.innerHTML =
+                    "";
+
+
+                mySuggestions.forEach(
+                    function(suggestion) {
+
+                        const card =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        card.className =
+                            "my-suggestion-card";
+
+
+                        card.innerHTML = `
+
+                            <div>
+
+                                <h3>
+                                    ${suggestion.placeName}
+                                </h3>
+
+                                <p>
+                                    ${suggestion.category}
+                                </p>
+
+                                <p>
+                                    📍 ${suggestion.address}
+                                </p>
+
+                                <p>
+                                    📅 ${suggestion.date || ""}
+                                </p>
+
+
+                                ${
+                                    suggestion.status ===
+                                    "Pending"
+
+                                    ? `
+
+                                        <p class="suggestion-status-message">
+
+                                            🕐 Waiting for admin verification
+
+                                        </p>
+
+                                    `
+
+                                    : ""
+                                }
+
+
+                                ${
+                                    suggestion.status ===
+                                    "Approved"
+
+                                    ? `
+
+                                        <p class="suggestion-status-message approved-message">
+
+                                            ✓ Added to Review4You
+
+                                        </p>
+
+
+                                        ${
+                                            suggestion.placeId
+
+                                            ? `
+
+                                                <a
+                                                    href="place.html?id=${suggestion.placeId}"
+                                                    class="suggestion-view-place"
+                                                >
+                                                    View Place →
+                                                </a>
+
+                                            `
+
+                                            : ""
+                                        }
+
+                                    `
+
+                                    : ""
+                                }
+
+
+                                ${
+                                    suggestion.status ===
+                                    "Rejected"
+
+                                    ? `
+
+                                        <p class="suggestion-status-message rejected-message">
+
+                                            This suggestion wasn't approved.
+
+                                        </p>
+
+                                    `
+
+                                    : ""
+                                }
+
+                            </div>
+
+
+                            <span
+                                class="my-suggestion-status status-${(
+                                    suggestion.status ||
+                                    "Pending"
+                                ).toLowerCase()}"
+                            >
+
+                                ${suggestion.status || "Pending"}
+
+                            </span>
+
+                        `;
+
+
+                        mySuggestionsList.appendChild(
+                            card
+                        );
+
+                    }
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Could not load your suggestions:",
+                error
+            );
+
+
+            mySuggestionsList.innerHTML = `
+
+                <div class="no-results">
+
+                    <h3>
+                        Could not load your suggestions.
+                    </h3>
+
+                    <p>
+                        Please refresh the page and try again.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

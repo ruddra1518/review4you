@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Review4You | Discover the Best Around You</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="homepage">
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">R</span>
+                <span>Review<span class="logo-highlight">4</span>You</span>
+            </a>
+
+<nav class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#recommended">Explore</a>
+    <a href="about.html">About</a>
+</nav>
+
+            <div id="accountMenu" class="account-menu"></div>
+            
+
+<div class="nav-actions">
+
+    <button class="location-btn" id="locationButton">
+        📍 Your Area
+    </button>
+
+
+    <a
+        href="login.html"
+        class="login-btn"
+        id="accountLink"
+    >
+        Login
+    </a>
+
+</div>
+<div class="location-popup" id="locationPopup">
+
+    <div class="location-popup-header">
+        <h3>Choose your location</h3>
+        <button id="closeLocationPopup">×</button>
+    </div>
+
+    <button class="detect-location-btn" id="detectLocationBtn">
+        📍 Use My Current Location
+    </button>
+
+    <div class="location-divider">
+        <span>or</span>
+    </div>
+
+    <div class="manual-location">
+
+        <label for="manualLocationInput">
+            Enter location manually
+        </label>
+
+        <input
+            type="text"
+            id="manualLocationInput"
+            placeholder="e.g. Bhilai, Chhattisgarh"
+            autocomplete="off"
+        >
+
+        <div
+            class="location-suggestions"
+            id="locationSuggestions"
+        ></div>
+
+        <button id="saveManualLocationBtn">
+            Use This Location
+        </button>
+
+    </div>
+
+</div>
+        </div>
+
+</header>
+
+
+
+
+
+<!-- HERO -->
+
+<main>
+
+        <section class="hero">
+
+            <div class="hero-background"></div>
+
+            <div class="hero-content">
+
+                <div class="trust-badge">
+                    <span>✦</span>
+                    You can trust our recommendations
+                </div>
+
+                <h1>
+                    Find the <span>best</span><br>
+                    around you.
+                </h1>
+
+                <p>
+                    Discover great food, affordable shops, medical stores
+                    and everyday services recommended by people who know
+                    your area.
+                </p>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-container">
+
+                    <div class="search-input">
+                        <span class="search-icon">⌕</span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="What are you looking for?"
+                        >
+                    </div>
+
+                    <button class="search-button" id="searchButton">
+                        Search
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+
+                <div class="popular-searches">
+
+                    <span>Popular:</span>
+
+                    <a href="#" class="popular-search" data-search="Samosa">Samosa</a>
+                    <a href="#" class="popular-search" data-search="Medical">Medical</a>
+                    <a href="#" class="popular-search" data-search="Grocery">Grocery</a>
+                    <a href="#" class="popular-search" data-search="Tiffin">Tiffin</a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORIES -->
+
+        <section class="section categories" id="categories">
+
+            <div class="section-header">
+
+                <div>
+                    <p class="eyebrow">EXPLORE</p>
+
+                    <h2>
+                        What do you need?
+                    </h2>
+                </div>
+
+                <a href="#" class="view-all">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div class="category-grid">
+
+
+                <a href="#" class="category-card food" data-category="Food & Snacks">
+
+                    <div class="category-icon">
+                        🍔
+                    </div>
+
+                    <h3>Food & Snacks</h3>
+
+                    <p>
+                        Find tasty local food
+                    </p>
+
+                    <span class="category-arrow">→</span>
+
+                </a>
+
+
+                <a href="#" class="category-card medical" data-category="Medical">
+
+                    <div class="category-icon">
+                        💊
+                    </div>
+
+                    <h3>Medical</h3>
+
+                    <p>
+                        Pharmacies & medicines
+                    </p>
+
+                    <span class="category-arrow">→</span>
+
+                </a>
+
+
+                <a href="#" class="category-card grocery" data-category="Grocery">
+
+                    <div class="category-icon">
+                        🛒
+                    </div>
+
+                    <h3>Grocery</h3>
+
+                    <p>
+                        Everyday essentials
+                    </p>
+
+                    <span class="category-arrow">→</span>
+
+                </a>
+
+
+                <a href="#" class="category-card services" data-category="Services">
+
+                    <div class="category-icon">
+                        🔧
+                    </div>
+
+                    <h3>Services</h3>
+
+                    <p>
+                        Helpful local services
+                    </p>
+
+                    <span class="category-arrow">→</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECOMMENDED -->
+
+        <section class="section recommended" id="recommended">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">LOCAL PICKS</p>
+
+                    <h2>
+                        Recommended for you
+                    </h2>
+
+                    <p class="section-description">
+                        Places personally checked and recommended by our team.
+                    </p>
+
+                </div>
+
+                <a href="#" class="view-all" id="viewAllPlaces">
+                    Explore all →
+                </a>
+
+                <select id="sortPlaces">
+                    <option value="default">Sort by</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="price">Lowest Price</option>
+                    <option value="recent">Recently Checked</option>
+                    <option value="distance">Nearest First</option>
+                </select>
+
+            </div>
+
+
+            <div class="places-grid" id="placesGrid">
+                    
+            </div>
+
+        </section>
+
+
+        <!-- WHY REVIEW4YOU -->
+
+        <section class="why-section">
+
+            <div class="why-content">
+
+                <p class="eyebrow">
+                    WHY REVIEW4YOU?
+                </p>
+
+                <h2>
+                    Not just reviews.<br>
+                    <span>Real knowledge about it.</span>
+                </h2>
+
+                <p>
+                    We focus on the things that actually matter —
+                    quality, price, value and real experience.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <h3>Personally Verified</h3>
+
+                        <p>
+                            Places are checked by our team.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ₹
+                    </div>
+
+                    <div>
+                        <h3>Know the Real Price</h3>
+
+                        <p>
+                            Compare value before you spend.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ★
+                    </div>
+
+                    <div>
+                        <h3>Local Recommendations</h3>
+
+                        <p>
+                            Suggestions from people who know the area.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+
+        <section class="cta">
+
+            <div>
+
+                <p class="eyebrow">
+                    HELP YOUR COMMUNITY
+                </p>
+
+                <h2>
+                    Know a great local place?
+                </h2>
+
+                <p>
+                    Share it with people around you.
+                </p>
+
+            </div>
+
+            <a href="recommend.html" class="cta-button">
+                Recommend a place →
+            </a>
+
+        </section>
+    
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <div class="logo footer-logo">
+                    <span class="logo-icon">R</span>
+                    <span>Review<span class="logo-highlight">4</span>You</span>
+                </div>
+
+                <p>
+                    Discover better places,<br>
+                    right around you.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Explore</h4>
+                    <a href="#">Food</a>
+                    <a href="#">Medical</a>
+                    <a href="#">Grocery</a>
+                    <a href="#">Services</a>
+                </div>
+
+                <div>
+                    <h4>Review4You</h4>
+                    <a href="about.html">About</a>
+                    <a href="about.html#how-it-works">How it works</a>
+                    <a href="about.html#contact">Contact</a>
+                    <a href="about.html#privacy">Privacy</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Review4You
+            </span>
+
+            <span>
+                Made for the local community ❤️
+            </span>
+
+        </div>
+
+    </footer>
+<script src="data.js"></script>
+<script src="review.js"></script>
+<script type="module" src="script.js?v=2"></script>
+</body>
+</html>

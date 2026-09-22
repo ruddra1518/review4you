@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About | Review4You</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================
+           ABOUT PAGE
+        ========================================= */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .about-page {
+            background: var(--cream);
+        }
+
+        /* =========================================
+           ABOUT HERO
+        ========================================= */
+
+        .about-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 95px 30px 90px;
+            background: #edf5ef;
+            text-align: center;
+        }
+
+        .about-hero::before,
+        .about-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .about-hero::before {
+            width: 420px;
+            height: 420px;
+            right: -170px;
+            top: -210px;
+            background: #dcecdf;
+        }
+
+        .about-hero::after {
+            width: 300px;
+            height: 300px;
+            left: -170px;
+            bottom: -180px;
+            background: #dfeee2;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .about-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            border: 1px solid #d2e3d5;
+            border-radius: 50px;
+
+            background: rgba(255, 255, 255, 0.75);
+
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .about-badge span {
+            font-size: 15px;
+        }
+
+        .about-hero h1 {
+            margin: 25px 0 20px;
+
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: clamp(42px, 6vw, 65px);
+            line-height: 1.08;
+            letter-spacing: -3px;
+        }
+
+        .about-hero h1 span {
+            color: var(--green);
+        }
+
+        .about-hero p {
+            max-width: 720px;
+            margin: 0 auto;
+
+            color: #68736c;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           COMMON SECTION
+        ========================================= */
+
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 85px 30px;
+
+            scroll-margin-top: 80px;
+        }
+
+        .about-section.green-bg {
+            max-width: none;
+            background: #edf5ef;
+        }
+
+        .about-section-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .about-eyebrow {
+            margin-bottom: 10px;
+
+            color: var(--green);
+
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .about-section h2 {
+            margin: 0;
+
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 34px;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+        }
+
+        .about-section-intro {
+            max-width: 850px;
+            margin: 12px 0 30px;
+
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           ABOUT
+        ========================================= */
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .about-card {
+            padding: 30px;
+
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+        }
+
+        .about-card-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 50%;
+            background: var(--green-light);
+
+            font-size: 21px;
+        }
+
+        .about-card h3 {
+            margin-bottom: 10px;
+
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 18px;
+        }
+
+        .about-card p {
+            margin: 0;
+
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           HOW IT WORKS
+        ========================================= */
+
+        .how-section {
+            background: #edf5ef;
+        }
+
+        .how-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .how-card {
+            padding: 25px;
+
+            background: white;
+            border: 1px solid #dce8de;
+            border-radius: 17px;
+        }
+
+        .how-number {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 50%;
+            background: var(--green-light);
+
+            color: var(--green);
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .how-card h3 {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .how-card p {
+            margin: 0;
+
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           CONTACT
+        ========================================= */
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            padding: 32px;
+
+            background: var(--dark);
+            border-radius: 17px;
+
+            color: white;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 50%;
+            background: #345b40;
+
+            font-size: 22px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 10px;
+
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 22px;
+        }
+
+        .contact-info p {
+            margin: 0;
+
+            color: #aeb9b1;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .contact-note {
+            margin-top: 30px;
+            padding-top: 20px;
+
+            border-top: 1px solid #354239;
+
+            color: #aeb9b1;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            padding: 30px;
+
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+
+            padding: 12px 13px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: #fafbfa;
+
+            font-family: inherit;
+            font-size: 13px;
+
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--green);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(47, 125, 82, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .contact-submit {
+            width: 100%;
+
+            padding: 13px 18px;
+
+            border: 0;
+            border-radius: 9px;
+
+            background: var(--dark);
+            color: white;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .contact-submit:hover {
+            background: var(--green);
+        }
+
+        /* =========================================
+           PRIVACY
+        ========================================= */
+
+        .privacy-section {
+            background: #edf5ef;
+        }
+
+        .privacy-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .privacy-card {
+            padding: 25px;
+
+            background: white;
+            border: 1px solid #dce8de;
+            border-radius: 17px;
+        }
+
+        .privacy-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 17px;
+
+            border-radius: 50%;
+            background: var(--green-light);
+
+            font-size: 19px;
+        }
+
+        .privacy-card h3 {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .privacy-card p {
+            margin: 0;
+
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .about-cards,
+            .how-steps,
+            .privacy-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .about-hero {
+                padding: 70px 20px;
+            }
+
+            .about-hero h1 {
+                font-size: 42px;
+                letter-spacing: -2px;
+            }
+
+            .about-hero p {
+                font-size: 15px;
+            }
+
+            .about-section {
+                padding: 65px 20px;
+            }
+
+            .about-section h2 {
+                font-size: 28px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 25px;
+            }
+
+        }
+
+        .mobile-home-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-home-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+
+        border-radius: 8px;
+        background: #f1f4f1;
+
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .mobile-home-btn:hover {
+        background: #e5ebe6;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body class="about-page">
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">R</span>
+
+                <span>
+                    Review<span class="logo-highlight">4</span>You
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="index.html#recommended">
+                    Explore
+                </a>
+
+                <a href="about.html" class="active">
+                    About
+                </a>
+
+            </nav>
+
+
+<div class="nav-actions">
+
+    <a href="index.html" class="mobile-home-btn" aria-label="Home">
+        🏠
+    </a>
+
+    <button class="location-btn" id="locationButton">
+        📍 Your Area
+    </button>
+
+    <a
+        href="login.html"
+        class="login-btn"
+        id="accountLink"
+    >
+        Login
+    </a>
+
+    <div id="accountMenu" class="account-menu"></div>
+
+</div>
+
+
+<!-- LOCATION POPUP -->
+
+<div class="location-popup" id="locationPopup">
+
+    <div class="location-popup-header">
+
+        <h3>
+            Choose your location
+        </h3>
+
+        <button id="closeLocationPopup">
+            ×
+        </button>
+
+    </div>
+
+
+    <button
+        class="detect-location-btn"
+        id="detectLocationBtn"
+    >
+        📍 Use My Current Location
+    </button>
+
+
+    <div class="location-divider">
+        <span>or</span>
+    </div>
+
+
+    <div class="manual-location">
+
+        <label for="manualLocationInput">
+            Enter location manually
+        </label>
+
+        <input
+            type="text"
+            id="manualLocationInput"
+            placeholder="e.g. Bhilai, Chhattisgarh"
+            autocomplete="off"
+        >
+
+        <div
+            class="location-suggestions"
+            id="locationSuggestions"
+        ></div>
+
+
+        <button id="saveManualLocationBtn">
+            Use This Location
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+
+    <section class="about-hero">
+
+        <div class="about-hero-content">
+
+            <div class="about-badge">
+                <span>✦</span>
+                About Review4You
+            </div>
+
+            <h1>
+                Better local choices.<br>
+                <span>Made simpler.</span>
+            </h1>
+
+            <p>
+                Review4You helps you discover useful local places,
+                understand what they offer, and make everyday decisions
+                using information and experiences from the local community.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <main>
+
+
+        <!-- =========================================
+             ABOUT
+        ========================================== -->
+
+        <section
+            class="about-section"
+            id="about"
+        >
+
+            <div class="about-section-inner">
+
+                <div class="about-eyebrow">
+                    ABOUT REVIEW4YOU
+                </div>
+
+                <h2>
+                    Built for everyday local decisions.
+                </h2>
+
+                <p class="about-section-intro">
+                    Review4You is a local discovery and review platform
+                    focused on useful places around your area. You can
+                    discover food and snacks, medical stores, grocery shops,
+                    services and other everyday places.
+                </p>
+
+
+                <div class="about-cards">
+
+                    <div class="about-card">
+
+                        <div class="about-card-icon">
+                            👥
+                        </div>
+
+                        <h3>
+                            What is Review4You?
+                        </h3>
+
+                        <p>
+                            Review4You brings useful local information
+                            together in one place. The goal is to make it
+                            easier to discover places that may be useful
+                            for everyday needs.
+                        </p>
+
+                    </div>
+
+
+                    <div class="about-card">
+
+                        <div class="about-card-icon">
+                            💡
+                        </div>
+
+                        <h3>
+                            Why was it created?
+                        </h3>
+
+                        <p>
+                            Finding a good local place should not always
+                            require asking several people or searching
+                            through unrelated information. Review4You is
+                            designed to make that process simpler.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             HOW IT WORKS
+        ========================================== -->
+
+        <section
+            class="about-section how-section"
+            id="how-it-works"
+        >
+
+            <div class="about-section-inner">
+
+                <div class="about-eyebrow">
+                    HOW IT WORKS
+                </div>
+
+                <h2>
+                    Find, explore and share.
+                </h2>
+
+                <p class="about-section-intro">
+                    Review4You keeps the process simple so you can
+                    discover places and learn from other local users.
+                </p>
+
+
+                <div class="how-steps">
+
+                    <div class="how-card">
+
+                        <div class="how-number">
+                            1
+                        </div>
+
+                        <h3>
+                            Search & Explore
+                        </h3>
+
+                        <p>
+                            Search for a place or explore categories
+                            such as food, medical, grocery and services.
+                        </p>
+
+                    </div>
+
+
+                    <div class="how-card">
+
+                        <div class="how-number">
+                            2
+                        </div>
+
+                        <h3>
+                            Check Information
+                        </h3>
+
+                        <p>
+                            View available ratings, reviews, price
+                            information, location and other useful details.
+                        </p>
+
+                    </div>
+
+
+                    <div class="how-card">
+
+                        <div class="how-number">
+                            3
+                        </div>
+
+                        <h3>
+                            Share Your Experience
+                        </h3>
+
+                        <p>
+                            Logged-in users can write a review, give
+                            a rating and help other people make decisions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CONTACT
+        ========================================== -->
+
+        <section
+            class="about-section"
+            id="contact"
+        >
+
+            <div class="about-section-inner">
+
+                <div class="about-eyebrow">
+                    CONTACT
+                </div>
+
+                <h2>
+                    Have something to tell us?
+                </h2>
+
+                <p class="about-section-intro">
+                    Send a message if you have a question, feedback,
+                    correction or suggestion about Review4You.
+                </p>
+
+
+                <div class="contact-layout">
+
+
+                    <div class="contact-info">
+
+                        <div class="contact-icon">
+                            ✉
+                        </div>
+
+                        <h3>
+                            Get in touch
+                        </h3>
+
+                        <p>
+                            Your feedback can help improve the information
+                            and experience provided by Review4You.
+                        </p>
+
+                        <div class="contact-note">
+                            Please provide a valid email address if you
+                            would like a response to your message.
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        class="contact-form"
+                        action="https://formspree.io/f/mnpndwry"
+                        method="POST"
+                    >
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="contactName">
+                                    Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="contactName"
+                                    name="name"
+                                    placeholder="Your name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="contactEmail">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="contactEmail"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contactMessage">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="contactMessage"
+                                name="message"
+                                placeholder="Write your message..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="contact-submit"
+                        >
+                            Send Message
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             PRIVACY
+        ========================================== -->
+
+        <section
+            class="about-section privacy-section"
+            id="privacy"
+        >
+
+            <div class="about-section-inner">
+
+                <div class="about-eyebrow">
+                    PRIVACY
+                </div>
+
+                <h2>
+                    Your information matters.
+                </h2>
+
+                <p class="about-section-intro">
+                    Review4You uses information needed to provide its
+                    account and community features.
+                </p>
+
+
+                <div class="privacy-cards">
+
+
+                    <div class="privacy-card">
+
+                        <div class="privacy-icon">
+                            👤
+                        </div>
+
+                        <h3>
+                            Account Information
+                        </h3>
+
+                        <p>
+                            Your account may contain information such as
+                            your name and email address for account-related
+                            features.
+                        </p>
+
+                    </div>
+
+
+                    <div class="privacy-card">
+
+                        <div class="privacy-icon">
+                            ⭐
+                        </div>
+
+                        <h3>
+                            Reviews
+                        </h3>
+
+                        <p>
+                            Reviews submitted through your account are
+                            stored so they can be displayed with the
+                            relevant place.
+                        </p>
+
+                    </div>
+
+
+                    <div class="privacy-card">
+
+                        <div class="privacy-icon">
+                            🔒
+                        </div>
+
+                        <h3>
+                            Keep It Simple
+                        </h3>
+
+                        <p>
+                            Review4You is designed to use information
+                            needed for the features provided by the
+                            website.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <div class="logo footer-logo">
+
+                    <span class="logo-icon">
+                        R
+                    </span>
+
+                    <span>
+                        Review<span class="logo-highlight">4</span>You
+                    </span>
+
+                </div>
+
+                <p>
+                    Discover better places,<br>
+                    right around you.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Explore
+                    </h4>
+
+                    <a href="index.html#categories">
+                        Food
+                    </a>
+
+                    <a href="index.html#categories">
+                        Medical
+                    </a>
+
+                    <a href="index.html#categories">
+                        Grocery
+                    </a>
+
+                    <a href="index.html#categories">
+                        Services
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Review4You
+                    </h4>
+
+                    <a href="#about">
+                        About
+                    </a>
+
+                    <a href="#how-it-works">
+                        How it works
+                    </a>
+
+                    <a href="#contact">
+                        Contact
+                    </a>
+
+                    <a href="#privacy">
+                        Privacy
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Review4You
+            </span>
+
+            <span>
+                Made for the local community ❤️
+            </span>
+
+        </div>
+
+    </footer>
+
+    <script src="location.js"></script>
+    <script type="module">
+    import {
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    import { auth } from "./firebase-config.js";
+
+
+    const accountLink =
+        document.getElementById("accountLink");
+
+    const accountMenu =
+        document.getElementById("accountMenu");
+
+
+    if (accountLink && accountMenu) {
+
+        onAuthStateChanged(auth, function(user) {
+
+            if (!user) {
+
+                accountLink.textContent = "Login";
+                accountLink.href = "login.html";
+                accountMenu.style.display = "none";
+
+                return;
+            }
+
+
+            const userName =
+                user.displayName ||
+                user.email?.split("@")[0] ||
+                "User";
+
+            const userEmail =
+                user.email || "";
+
+
+            if (window.innerWidth <= 768) {
+
+                accountLink.textContent =
+                    userName.trim().split(/\s+/)[0];
+
+            } else {
+
+                accountLink.textContent =
+                    userName;
+
+            }
+
+
+            accountLink.href = "#";
+
+
+            accountLink.onclick = function(event) {
+
+                event.preventDefault();
+
+
+                accountMenu.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            👤 ${userName}
+                        </strong>
+
+                        <p>
+                            ${userEmail}
+                        </p>
+
+                        <hr>
+
+                        <a href="my-reviews.html">
+                            📝 My Reviews
+                        </a>
+
+                        <a href="saved-places.html">
+                            ❤️ Saved Places
+                        </a>
+
+                        <a href="account.html">
+                            ⚙️ Account Settings
+                        </a>
+
+                        <hr>
+
+                        <button id="aboutLogoutBtn">
+                            Logout
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                accountMenu.style.display =
+                    accountMenu.dataset.open === "true"
+                        ? "none"
+                        : "block";
+
+                accountMenu.dataset.open =
+                    accountMenu.dataset.open === "true"
+                        ? "false"
+                        : "true";
+
+
+                const logoutBtn =
+                    document.getElementById("aboutLogoutBtn");
+
+
+                logoutBtn.addEventListener(
+                    "click",
+                    async function() {
+
+                        if (
+                            !confirm(
+                                "Are you sure you want to logout?"
+                            )
+                        ) {
+                            return;
+                        }
+
+
+                        try {
+
+                            await signOut(auth);
+
+                            window.location.href =
+                                "login.html";
+
+                        } catch (error) {
+
+                            console.error(error);
+
+                            alert(
+                                "Could not logout. Please try again."
+                            );
+
+                        }
+
+                    }
+                );
+
+            };
+
+        });
+
+    }
+
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                accountMenu &&
+                !accountMenu.contains(event.target) &&
+                !accountLink.contains(event.target)
+            ) {
+
+                accountMenu.style.display = "none";
+                accountMenu.dataset.open = "false";
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

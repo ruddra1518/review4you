@@ -1,0 +1,102 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================
+    // ADMIN CHECK
+    // ============================
+
+    function isAdmin() {
+      return request.auth != null
+          && request.auth.uid == "ipgM8HhJdrfx4hdSBSLg1tXPUkC3";
+    }
+
+
+    // ============================
+    // PLACES
+    // ============================
+
+    match /places/{placeId} {
+
+      // Everyone can view places.
+      allow read: if true;
+
+      // Only admin can add/edit/delete places.
+      allow write: if isAdmin();
+    }
+
+
+    // ============================
+    // CATEGORIES
+    // ============================
+
+    match /categories/{categoryId} {
+
+      // Everyone can read categories.
+      allow read: if true;
+
+      // Only admin can manage categories.
+      allow write: if isAdmin();
+    }
+
+
+    // ============================
+    // REVIEWS
+    // ============================
+
+    match /reviews/{reviewId} {
+
+      // Everyone can read reviews.
+      allow read: if true;
+
+      // User can create only their own review.
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+
+      // User can update only their own review.
+      allow update: if request.auth != null
+        && resource.data.userId == request.auth.uid
+        && request.resource.data.userId == request.auth.uid;
+
+      // User can delete their own review OR admin can delete any review.
+        allow delete: if request.auth != null
+         && (
+      resource.data.userId == request.auth.uid
+      || isAdmin()
+        );
+    }
+
+
+    // ============================
+    // USER SUGGESTIONS
+    // ============================
+
+    match /suggestions/{suggestionId} {
+
+      // Admin can read everything.
+      // Normal users can read only their own suggestions.
+      allow read: if isAdmin()
+        || (
+            request.auth != null
+            && resource.data.userId == request.auth.uid
+        );
+
+      // Logged-in users can submit their own suggestions.
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+
+      // Only admin can approve/reject/delete suggestions.
+      allow update, delete: if isAdmin();
+    }
+
+
+    // ============================
+    // EVERYTHING ELSE
+    // ============================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
