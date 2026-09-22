@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Recommend a Place - Review4You</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="#" class="logo">
+                <span class="logo-icon">R</span>
+                <span>Review<span class="logo-highlight">4</span>You</span>
+            </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#explore">Explore</a>
+            <a href="index.html#categories">Categories</a>
+        </nav>
+
+        <div id="accountMenu" class="account-menu"></div>
+
+        <div class="nav-actions">
+
+            <!-- Home -->
+            <a href="index.html" class="home-btn" title="Home">
+                🏠
+            </a>
+
+            <!-- Location -->
+            <button class="location-btn" id="locationButton">
+                📍 Your Area
+            </button>
+
+            <!-- Account -->
+            <a href="login.html" class="login-btn" id="accountLink">
+                Login
+            </a>
+
+        </div>
+
+        <div class="location-popup" id="locationPopup">
+
+            <div class="location-popup-header">
+                <h3>Choose your location</h3>
+                <button id="closeLocationPopup">×</button>
+            </div>
+
+            <button class="detect-location-btn" id="detectLocationBtn">
+                📍 Use My Current Location
+            </button>
+
+            <div class="location-divider">
+                <span>or</span>
+            </div>
+
+            <div class="manual-location">
+                <label for="manualLocationInput">
+                    Enter location manually
+                </label>
+
+                <input
+                    type="text"
+                    id="manualLocationInput"
+                    placeholder="e.g. Bhilai, Chhattisgarh"
+                    autocomplete="off"
+                >
+
+                <div
+                    class="location-suggestions"
+                    id="locationSuggestions">
+                </div>
+
+                <button id="saveManualLocationBtn">
+                    Use This Location
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+
+    <!-- RECOMMEND PAGE -->
+
+    <main class="recommend-page">
+
+        <div class="recommend-container">
+
+
+            <div class="recommend-intro">
+
+                <p class="eyebrow">
+                    HELP YOUR COMMUNITY
+                </p>
+
+                <h1>
+                    Know a great local place?
+                </h1>
+
+                <p>
+                    Tell us about it and help people discover
+                    better places around them.
+                </p>
+
+            </div>
+
+
+            <div class="recommend-card">
+
+                <div class="recommend-card-header">
+
+                    <h2>
+                        Recommend a place
+                    </h2>
+
+                    <p>
+                        Our team will review your suggestion
+                        before adding it to Review4You.
+                    </p>
+
+                </div>
+
+
+                <form id="recommendForm">
+
+
+                    <!-- PLACE NAME -->
+
+                    <div class="recommend-field">
+
+                        <label for="recommendPlaceName">
+                            Place name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="recommendPlaceName"
+                            placeholder="e.g. Sharma Tea Corner"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="recommend-field">
+
+                        <label for="recommendCategory">
+                            Category
+                        </label>
+
+<select
+    id="recommendCategory"
+    required
+>
+    <option value="">
+        Select a category
+    </option>
+</select>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="recommend-field">
+
+                        <label for="recommendAddress">
+                            Address / Area
+                        </label>
+
+                        <input
+                            type="text"
+                            id="recommendAddress"
+                            placeholder="e.g. Main Road, Bhilai"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- REASON -->
+
+                    <div class="recommend-field">
+
+                        <label for="recommendReason">
+                            Why do you recommend this place?
+                        </label>
+
+                        <textarea
+                            id="recommendReason"
+                            rows="5"
+                            placeholder="Tell us what makes this place worth recommending..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="recommend-actions">
+
+                        <a
+                            href="index.html"
+                            class="recommend-cancel"
+                        >
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="recommend-submit"
+                        >
+                            Submit Suggestion →
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+            <div class="recommend-note">
+
+                <span>
+                    ✓
+                </span>
+
+                <p>
+                    Suggestions are reviewed by our team.
+                    A place will only appear on Review4You
+                    after it has been checked and approved.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </main>
+<script type="module" src="recommend.js"></script>
+<script src="location.js"></script>
+
+<script type="module">
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import { auth } from "./firebase-config.js";
+
+
+const accountLink =
+    document.getElementById("accountLink");
+
+const accountMenu =
+    document.getElementById("accountMenu");
+
+
+if (accountLink && accountMenu) {
+
+    onAuthStateChanged(auth, function(user) {
+
+        if (!user) {
+
+            accountLink.textContent =
+                "Login";
+
+            accountLink.href =
+                "login.html";
+
+            accountMenu.style.display =
+                "none";
+
+            return;
+        }
+
+
+        const userName =
+            user.displayName ||
+            user.email?.split("@")[0] ||
+            "User";
+
+        const userEmail =
+            user.email || "";
+
+
+        accountLink.innerHTML =
+            '👤 <span class="account-name">' +
+            userName +
+            '</span>';
+
+        accountLink.href = "#";
+
+
+        accountLink.onclick =
+            function(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+
+                if (
+                    accountMenu.dataset.open ===
+                    "true"
+                ) {
+
+                    accountMenu.style.display =
+                        "none";
+
+                    accountMenu.dataset.open =
+                        "false";
+
+                    return;
+                }
+
+
+                accountMenu.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            👤 ${userName}
+                        </strong>
+
+                        <p>
+                            ${userEmail}
+                        </p>
+
+                        <hr>
+
+                        <a href="my-reviews.html">
+                            📝 My Reviews
+                        </a>
+
+                        <a href="saved-places.html">
+                            ❤️ Saved Places
+                        </a>
+
+                        <a href="account.html">
+                            ⚙️ Account Settings
+                        </a>
+
+                        <hr>
+
+                        <button id="recommendLogoutBtn">
+                            Logout
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                accountMenu.style.display =
+                    "block";
+
+                accountMenu.dataset.open =
+                    "true";
+
+
+                const logoutBtn =
+                    document.getElementById(
+                        "recommendLogoutBtn"
+                    );
+
+
+                logoutBtn.addEventListener(
+                    "click",
+                    async function() {
+
+                        try {
+
+                            await signOut(auth);
+
+                            window.location.href =
+                                "login.html";
+
+                        } catch (error) {
+
+                            console.error(error);
+
+                            alert(
+                                "Could not logout. Please try again."
+                            );
+
+                        }
+
+                    }
+                );
+
+            };
+
+
+        accountMenu.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    !accountMenu.contains(event.target) &&
+                    !accountLink.contains(event.target)
+                ) {
+
+                    accountMenu.style.display =
+                        "none";
+
+                    accountMenu.dataset.open =
+                        "false";
+
+                }
+
+            }
+        );
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

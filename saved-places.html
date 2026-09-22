@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Saved Places - Review4You</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ==========================
+         NAVBAR
+    =========================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">R</span>
+
+                <span>
+                    Review<span class="logo-highlight">4</span>You
+                </span>
+
+            </a>
+
+            <nav class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="index.html#recommended">
+                    Recommendations
+                </a>
+
+            </nav>
+
+<div class="nav-actions">
+    <a href="index.html" class="home-btn" title="Home">
+        🏠
+    </a>
+    <button class="location-btn" id="locationButton">
+        📍 Your Area
+    </button>
+
+    <a href="login.html" class="login-btn" id="accountLink">
+        Login
+    </a>
+
+</div>
+            <!-- LOCATION POPUP -->
+
+<div
+    class="location-popup"
+    id="locationPopup"
+>
+
+    <div class="location-popup-header">
+
+        <h3>
+            Choose your location
+        </h3>
+
+        <button id="closeLocationPopup">
+            ×
+        </button>
+
+    </div>
+
+
+    <button
+        class="detect-location-btn"
+        id="detectLocationBtn"
+    >
+        📍 Use My Current Location
+    </button>
+
+
+    <div class="location-divider">
+
+        <span>
+            or
+        </span>
+
+    </div>
+
+
+    <div class="manual-location">
+
+        <label for="manualLocationInput">
+            Enter location manually
+        </label>
+
+
+        <input
+            type="text"
+            id="manualLocationInput"
+            placeholder="e.g. Bhilai, Chhattisgarh"
+            autocomplete="off"
+        >
+
+
+        <div
+            class="location-suggestions"
+            id="locationSuggestions"
+        ></div>
+
+
+        <button id="saveManualLocationBtn">
+            Use This Location
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+        <div
+            id="accountMenu"
+            class="account-menu"
+        ></div>
+
+    </header>
+
+
+    <!-- ==========================
+         SAVED PLACES
+    =========================== -->
+
+    <main>
+
+        <section class="saved-places-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        YOUR SAVED PLACES
+                    </p>
+
+                    <h1>
+                        Saved Places
+                    </h1>
+
+                    <p class="section-description">
+                        Places you've saved for later.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="places-grid"
+                id="savedPlacesGrid"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================
+         JAVASCRIPT
+    =========================== -->
+
+<script src="data.js"></script>
+<script src="review.js"></script>
+<script type="module" src="saved-places.js"></script>
+<script src="location.js"></script>
+
+<script type="module">
+
+// ==========================
+// FIREBASE ACCOUNT
+// ==========================
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import { auth } from "./firebase-config.js";
+
+
+const accountLink =
+    document.getElementById("accountLink");
+
+const accountMenu =
+    document.getElementById("accountMenu");
+
+
+if (accountLink && accountMenu) {
+
+    onAuthStateChanged(auth, function(user) {
+
+        // ==========================
+        // NOT LOGGED IN
+        // ==========================
+
+        if (!user) {
+
+            accountLink.textContent =
+                "Login";
+
+            accountLink.href =
+                "login.html";
+
+            accountMenu.style.display =
+                "none";
+
+            return;
+        }
+
+
+        // ==========================
+        // LOGGED IN
+        // ==========================
+
+        const userName =
+            user.displayName ||
+            user.email?.split("@")[0] ||
+            "User";
+
+        const userEmail =
+            user.email || "";
+
+
+        accountLink.innerHTML =
+            '👤 <span class="account-name">' +
+            userName +
+            '</span>';
+
+        accountLink.href = "#";
+
+
+        // ==========================
+        // ACCOUNT MENU
+        // ==========================
+
+        accountLink.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+
+                accountMenu.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            👤 ${userName}
+                        </strong>
+
+                        <p>
+                            ${userEmail}
+                        </p>
+
+                        <hr>
+
+                        <a href="my-reviews.html">
+                            📝 My Reviews
+                        </a>
+
+                        <a href="saved-places.html">
+                            ❤️ Saved Places
+                        </a>
+
+                        <a href="account.html">
+                            ⚙️ Account Settings
+                        </a>
+
+                        <hr>
+
+                        <button id="savedLogoutBtn">
+                            Logout
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                // ==========================
+                // TOGGLE MENU
+                // ==========================
+
+                if (
+                    accountMenu.dataset.open ===
+                    "true"
+                ) {
+
+                    accountMenu.style.display =
+                        "none";
+
+                    accountMenu.dataset.open =
+                        "false";
+
+                } else {
+
+                    accountMenu.style.display =
+                        "block";
+
+                    accountMenu.dataset.open =
+                        "true";
+                }
+
+
+                // ==========================
+                // LOGOUT
+                // ==========================
+
+                const savedLogoutBtn =
+                    document.getElementById(
+                        "savedLogoutBtn"
+                    );
+
+
+                savedLogoutBtn.addEventListener(
+                    "click",
+                    async function() {
+
+                        try {
+
+                            await signOut(auth);
+
+                            window.location.href =
+                                "login.html";
+
+                        } catch (error) {
+
+                            console.error(error);
+
+                            alert(
+                                "Could not logout. Please try again."
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+// ==========================
+// CLOSE ACCOUNT MENU
+// ==========================
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            accountMenu &&
+            accountLink &&
+            !accountMenu.contains(event.target) &&
+            !accountLink.contains(event.target)
+        ) {
+
+            accountMenu.style.display =
+                "none";
+
+            accountMenu.dataset.open =
+                "false";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - Review4You</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <div class="auth-container">
+
+            <!-- BRAND -->
+
+            <a
+                href="index.html"
+                class="auth-logo"
+            >
+
+                <span class="logo-icon">
+                    R
+                </span>
+
+                <span>
+                    Review<span class="logo-highlight">4</span>You
+                </span>
+
+            </a>
+
+
+            <!-- LOGIN CARD -->
+
+            <div class="auth-card">
+
+                <div class="auth-header">
+
+                    <h1>
+                        Welcome Back
+                    </h1>
+
+                    <p>
+                        Login to continue to Review4You.
+                    </p>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                    >
+
+                    <a
+                        href="forgot-password.html"
+                        class="forgot-password-link"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="loginBtn"
+                    class="auth-button"
+                >
+                    Login
+                </button>
+
+
+                <!-- GOOGLE LOGIN -->
+
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+
+
+                <button
+                    type="button"
+                    id="googleLoginBtn"
+                    class="google-auth-button"
+                >
+                    <span class="google-icon">G</span>
+                    Continue with Google
+                </button>
+
+
+                <p class="auth-switch">
+
+                    Don't have an account?
+
+                    <a href="signup.html">
+                        Create Account
+                    </a>
+
+                </p>
+
+            </div>
+
+
+            <!-- BACK HOME -->
+
+            <a
+                href="index.html"
+                class="auth-back"
+            >
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- FIREBASE AUTH -->
+
+    <script type="module" src="auth.js"></script>
+
+
+    <!-- GOOGLE SIGN-IN -->
+
+    <script type="module">
+
+        import {
+            GoogleAuthProvider,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+        import { auth } from "./firebase-config.js";
+
+
+        const googleLoginBtn =
+            document.getElementById("googleLoginBtn");
+
+
+        if (googleLoginBtn) {
+
+            googleLoginBtn.addEventListener(
+                "click",
+                async function () {
+
+                    try {
+
+                        const provider =
+                            new GoogleAuthProvider();
+
+
+                        await signInWithPopup(
+                            auth,
+                            provider
+                        );
+
+
+                        alert("Google login successful!");
+
+                        window.location.href =
+                            "index.html";
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        if (
+                            error.code ===
+                            "auth/popup-closed-by-user"
+                        ) {
+
+                            return;
+
+                        }
+
+                        if (
+                            error.code ===
+                            "auth/popup-blocked"
+                        ) {
+
+                            alert(
+                                "Google sign-in popup was blocked. Please allow popups and try again."
+                            );
+
+                            return;
+                        }
+
+                        alert(
+                            "Could not sign in with Google. Please try again."
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
