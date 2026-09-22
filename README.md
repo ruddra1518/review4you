@@ -123,11 +123,6 @@ review4you/
 ├── css/
 │   └── style.css
 │
-├── admin/
-│   ├── index.html
-│   ├── admin.js
-│   └── admin.css
-│
 ├── firebase.json
 ├── firestore.rules
 ├── firestore.indexes.json
